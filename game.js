@@ -17,6 +17,13 @@ const WINNING_SCORE = 3;
 var showingWinScreen = false; 
 
 var hitSound = new Audio('ball.mp4');
+var music = new Audio('music.mp3');
+/*
+Extreme Sport Trap Music | PISTA by Alex-Productions | https://onsound.eu/
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
+*/
 
 
 function calculateMousePos(evt) {
@@ -43,9 +50,20 @@ function ballReset() {
         showingWinScreen = true;
     }
 
-    ballSpeedX = - ballSpeedX;
+    //stop the speed temporarly
+    ballSpeedX = 0;
+    ballSpeedY = 0;
+
+    //pozition the ball in the center of the canvas
     ballX = canvas.width/2;
     ballY = canvas.height/2;
+
+    // Restart the ball's movement after one sec
+    setTimeout(function() {
+        // Randomize the ball's direction
+        ballSpeedX = (Math.random() < 0.5 ? -5 : 5);  // left or right
+        ballSpeedY = (Math.random() < 0.5 ? -2 : 2);  // up or down
+        }, 1000);
 }
 
 function computerMovement() {
@@ -116,24 +134,43 @@ function drawNet(){
     }
 }
 
+// Event listener for the "Play Again" button
+document.getElementById('playAgain').addEventListener('click', function() {
+    player1Score = 0;
+    player2Score = 0;
+    showingWinScreen = false;
+
+    this.style.display = 'none';  // Hide "Play Again" button
+});
+
 function drawEverything() {
-    //black screen
+
     colorRect(0,0,canvas.width,canvas.height, 'black');
 
 
     if (showingWinScreen) {
         canvasContext.fillStyle = 'white';
 
+        canvasContext.font = 'bold 30px Poppins';
+        canvasContext.fillStyle = 'blue';
+        canvasContext.textAlign = 'center';
+
         if (player1Score >= WINNING_SCORE) {
-            canvasContext.fillText("You Won!",350, 200);
+            canvasContext.fillText("You Won!",canvas.width/2, 200);
         } else if (player2Score >= WINNING_SCORE) {
-            canvasContext.fillText("Right Player Won!",350, 200);
+            canvasContext.fillText("Right Player Won!",canvas.width/2, 200);
         } 
        
-      
-        canvasContext.fillText("Click to continue",350, 500);
+        const playAgainButton = document.querySelector(".playAgain");
+        if (playAgainButton) {
+            playAgainButton.style.display = "block";
+        }
         return;
     }
+
+    canvasContext.textAlign = 'left';
+    canvasContext.font = '16px Arial';
+    canvasContext.fillStyle = 'white';
 
     drawNet();
 
@@ -164,17 +201,10 @@ function colorRect(leftX,topY, width, height, drawColor){
     canvasContext.fillRect(leftX, topY, width, height);
 }
 
-// function handleMouseClick(evt) {
-//     if (showingWinScreen) {
-//         player1Score = 0;
-//         player2Score = 0;
-//         showingWinScreen = false;
-//     }
-// }
-
  // Function to start the game
  function startGame() {
 
+    music.play();
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     canvas.style.display = 'block';
@@ -195,10 +225,8 @@ function colorRect(leftX,topY, width, height, drawColor){
     );
 }
 
-
-// Event listener for the Play button
 document.getElementById('playButton').addEventListener('click', function() {
-    startGame();  // Call the function to start the game
+    startGame();
     this.style.display = 'none';  // Hide the Play button
 });
 
