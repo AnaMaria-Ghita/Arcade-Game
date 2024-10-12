@@ -245,8 +245,10 @@ function togglePause() {
     var pauseButton = document.getElementById('pauseButton');
     if (isPaused) {
         pauseButton.textContent = 'Resume';  // Change button text to Resume
+        music.pause();
     } else {
         pauseButton.textContent = 'Pause';  // Change button text to Pause
+        music.play();
     }
 }
 
