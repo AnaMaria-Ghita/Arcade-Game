@@ -19,8 +19,17 @@
 	</div>
 
 	<script>
+
+		var glitterSound = new Audio('glitter.mp3');
+		glitterSound.load();  // Preload the sound
+
+		document.getElementById('playButton').addEventListener('mouseover', function() {
+			glitterSound.play();
+		});
+
         // Function to start the game when button is clicked
         document.getElementById('playButton').addEventListener('click', function() {
+			this.style.display = 'none'; 
             document.getElementById('gameCanvas').style.display = 'block';  // Show the canvas
             startGame(); // Call the game start function
         });
