@@ -25,6 +25,8 @@ Creative Commons CC BY 3.0
 https://creativecommons.org/licenses/by/3.0/
 */
 
+var isPaused = false; // at first, the game is not paused
+
 
 function calculateMousePos(evt) {
     var rect = canvas.getBoundingClientRect();
@@ -78,8 +80,8 @@ function computerMovement() {
 
 
 function moveEverything() {
-    if (showingWinScreen) {
-        return;
+    if (showingWinScreen || isPaused) {
+        return; // the game stops if someone wins or it is paused
     }
 
     computerMovement();
@@ -150,7 +152,6 @@ function drawEverything() {
 
     if (showingWinScreen) {
         canvasContext.fillStyle = 'white';
-
         canvasContext.font = 'bold 30px Poppins';
         canvasContext.fillStyle = 'blue';
         canvasContext.textAlign = 'center';
@@ -183,8 +184,8 @@ function drawEverything() {
     //the ball
     colorCircle(ballX, ballY, 10, 'white');
 
-    canvasContext.fillText("Player 1 Score", 70, 80);
-    canvasContext.fillText("Player 2 Score", canvas.width - 130, 80);
+    canvasContext.fillText("Player 1 Score", 50, 80);
+    canvasContext.fillText("Player 2 Score", canvas.width - 150, 80);
     canvasContext.fillText(player1Score, 100, 100);
     canvasContext.fillText(player2Score, canvas.width - 100, 100);
 }
@@ -208,6 +209,8 @@ function colorRect(leftX,topY, width, height, drawColor){
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     canvas.style.display = 'block';
+
+    document.getElementById('pauseButton').style.display = 'block';  // Show pause button
     
     var framesPerSecond = 25;
     setInterval(	function() {
@@ -227,6 +230,18 @@ function colorRect(leftX,topY, width, height, drawColor){
 
 document.getElementById('playButton').addEventListener('click', function() {
     startGame();
-    this.style.display = 'none';  // Hide the Play button
+    this.style.display = 'none';
 });
 
+function togglePause() {
+    isPaused = !isPaused;
+
+    var pauseButton = document.getElementById('pauseButton');
+    if (isPaused) {
+        pauseButton.textContent = 'Resume';  // Change button text to Resume
+    } else {
+        pauseButton.textContent = 'Pause';  // Change button text to Pause
+    }
+}
+
+document.getElementById('pauseButton').addEventListener('click', togglePause);

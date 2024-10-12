@@ -70,7 +70,7 @@ h1 {
 }
 
 .lable {
-    line-height: 1; /* Single line height to fix alignment */
+    line-height: 1;
     font-size: 17px;
     color: #2bff6b;
     letter-spacing: 1px;
@@ -117,4 +117,22 @@ h1 {
         width: 16px;
         height: 16px;
     }
+}
+
+/* pause button */
+#pauseButton {
+    position: absolute;
+    top: 10px; 
+    right: 10px;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;   /* Rounds the button's corners */
+    font-size: 16px;
+}
+
+#pauseButton:hover {
+    background-color: #2980b9;
 }
