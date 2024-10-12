@@ -22,7 +22,7 @@ h1 {
 }
 
 
-button {
+#playButton {
     padding: 10px 20px;
     text-transform: uppercase;
     border-radius: 8px;
@@ -39,7 +39,7 @@ button {
   }
   
   #playButton:hover,
-  :focus {
+  #playButton:focus {
     color: #ffffff;
     background: #008cff;
     border: 1px solid #008cff;
@@ -48,4 +48,73 @@ button {
       0 0 100px #008cff;
   }
   
+/* playAgain Button */
+.playAgain {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    gap: 8px;
+    height: 44px;
+    width: 160px;
+    border: none;
+    background: rgba(61, 228, 136, 0.474);
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s ease;
+    z-index: 1000;
+}
 
+.lable {
+    line-height: 1; /* Single line height to fix alignment */
+    font-size: 17px;
+    color: #2bff6b;
+    letter-spacing: 1px;
+    white-space: nowrap; /* Prevent text wrapping */
+    display: inline-block;
+    vertical-align: middle; /* Align with SVG */
+}
+
+.playAgain:hover {
+    background: rgba(43, 255, 75, 0.32);
+}
+
+.playAgain:hover .svg-icon {
+    animation: spin 2s linear infinite;
+}
+
+.svg-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle; /* Align with text */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg); /* Clockwise rotation */
+    }
+}
+
+@media (max-width: 600px) {
+    .playAgain {
+        width: 120px;
+        height: 36px;
+    }
+
+    .lable {
+        font-size: 14px;
+    }
+
+    .svg-icon {
+        width: 16px;
+        height: 16px;
+    }
+}
