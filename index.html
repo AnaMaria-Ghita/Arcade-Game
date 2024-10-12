@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Arcade Game</title>
+	<link rel="stylesheet" href="./styles.css">
+	<script src="./game.js" defer></script>
+</head>
+<body>
+	<div id="app-wrapper">
+	<div class="title">
+		<h1>Arcade game</h1>
+
+		<button id="playButton">Play</button>
+	</div>
+	
+	<canvas id = "gameCanvas" width ="800" height="600" style="display: none;"></canvas>
+	</div>
+
+	<script>
+        // Function to start the game when button is clicked
+        document.getElementById('playButton').addEventListener('click', function() {
+            document.getElementById('gameCanvas').style.display = 'block';  // Show the canvas
+            startGame(); // Call the game start function
+        });
+    </script>
+	
+
+</body>
+</html>
