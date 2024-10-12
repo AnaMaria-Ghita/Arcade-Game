@@ -143,6 +143,11 @@ document.getElementById('playAgain').addEventListener('click', function() {
     showingWinScreen = false;
 
     this.style.display = 'none';  // Hide "Play Again" button
+
+    // Restart the music
+    music.currentTime = 0;
+    music.play();
+
 });
 
 function drawEverything() {
@@ -205,6 +210,7 @@ function colorRect(leftX,topY, width, height, drawColor){
  // Function to start the game
  function startGame() {
 
+    music.currentTime = 0;
     music.play();
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
