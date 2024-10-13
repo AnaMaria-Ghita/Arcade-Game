@@ -136,3 +136,57 @@ h1 {
 #pauseButton:hover {
     background-color: #2980b9;
 }
+
+.toggleMusicButton {
+    --color: #a5a5b0;
+    --size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    right: 70px;
+    cursor: pointer;
+    font-size: var(--size);
+    user-select: none;
+    fill: var(--color);
+  }
+  
+  .toggleMusicButton .mute {
+    position: absolute;
+    animation: keyframes-fill .5s;
+  }
+  
+  .toggleMusicButton .voice {
+    position: absolute;
+    display: none;
+    animation: keyframes-fill .5s;
+  }
+  
+  .toggleMusicButton input:checked ~ .mute {
+    display: none;
+  }
+  
+  .toggleMusicButton input:checked ~ .voice {
+    display: block;
+  }
+  
+  .toggleMusicButton input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  @keyframes keyframes-fill {
+    0% {
+      transform: rotate(0deg) scale(0);
+      opacity: 0;
+    }
+  
+    50% {
+      transform: rotate(-10deg) scale(1.2);
+    }
+  }
+
