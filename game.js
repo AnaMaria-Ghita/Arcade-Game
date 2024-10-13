@@ -146,7 +146,7 @@ document.getElementById('playAgain').addEventListener('click', function() {
 
     // Restart the music
     music.currentTime = 0;
-    music.play();
+    // music.play();
 
 });
 
@@ -207,17 +207,22 @@ function colorRect(leftX,topY, width, height, drawColor){
     canvasContext.fillRect(leftX, topY, width, height);
 }
 
+
+let isMusicPlaying = true;
+
  // Function to start the game
  function startGame() {
 
-    music.currentTime = 0;
-    music.play();
+    // music.currentTime = 0;
+    // music.play();
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
     canvas.style.display = 'block';
 
     document.getElementById('pauseButton').style.display = 'block';  // Show pause button
-    
+    document.getElementById('toggleMusicButton').style.display = 'inline-block';
+
+
     var framesPerSecond = 25;
     setInterval(	function() {
                 moveEverything();
@@ -237,7 +242,10 @@ function colorRect(leftX,topY, width, height, drawColor){
 document.getElementById('playButton').addEventListener('click', function() {
     startGame();
     this.style.display = 'none';
+    music.currentTime = 0;
+    music.play();
 });
+
 
 function togglePause() {
     isPaused = !isPaused;
@@ -253,3 +261,17 @@ function togglePause() {
 }
 
 document.getElementById('pauseButton').addEventListener('click', togglePause);
+
+const musicToggleCheckbox = document.getElementById('musicToggleCheckbox');
+
+musicToggleCheckbox.addEventListener('change', function() {
+    if (this.checked) {
+        // Checkbox is checked, play the music
+        music.play();
+        isMusicPlaying = true;
+    } else {
+        // Checkbox is unchecked, stop the music
+        music.pause();
+        isMusicPlaying = false;
+    }
+});
